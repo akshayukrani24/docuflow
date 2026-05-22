@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DocuFlow
 
-## Getting Started
+A lightweight collaborative document editor built for the Ajaia AI-Native Full Stack Developer Assignment.
 
-First, run the development server:
+## Live Demo
+
+> Deployment link: *(see SUBMISSION.md)*
+
+**Demo accounts** (password: `password123` for both):
+
+| Name | Email |
+|------|-------|
+| Akshay Kumar | akshay@docuflow.app |
+| Alex Reviewer | reviewer@docuflow.app |
+
+## Features
+
+- **Rich-text editor** — Bold, italic, underline, strikethrough, H1/H2/H3, bullet lists, numbered lists, blockquote, undo/redo
+- **Document management** — Create, rename (inline), delete, reopen
+- **Autosave** — Saves 1.5s after you stop typing with a visible Saved/Saving/Unsaved indicator
+- **File import** — Upload `.txt` or `.md` files to create a new editable document (`.docx` not supported in this version)
+- **Sharing** — Share any owned document with another user; Owned vs Shared docs shown with distinct UI badges
+- **Persistence** — SQLite database; all documents and sharing state survive refresh
+
+## Local Setup
+
+### Prerequisites
+
+- Node.js 18+
+- npm 9+
+
+### Steps
 
 ```bash
+# 1. Clone and install dependencies
+npm install
+
+# 2. Create the database
+npx prisma migrate dev
+
+# 3. Seed demo users and sample document
+npx prisma db seed
+
+# 4. Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Sign in with one of the demo accounts above.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+A `.env` file is included with safe defaults for local dev:
 
-## Learn More
+```
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_SECRET="docuflow-secret-key-change-in-production"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
-To learn more about Next.js, take a look at the following resources:
+For production, replace `NEXTAUTH_SECRET` with a strong random string.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Running Tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm test
+```
 
-## Deploy on Vercel
+## Supported Import File Types
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Extension | Supported |
+|-----------|-----------|
+| `.txt` | Yes |
+| `.md` / `.markdown` | Yes — headings and bullet lists are parsed |
+| `.docx` | Not supported in this version |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Unsupported types are rejected with a clear error message in the UI and API.
+
+## Project Structure
+
+```
+src/
+  app/
+    api/            ← Route handlers (documents CRUD, share, upload, users)
+    dashboard/      ← Document list page (owned + shared sections)
+    documents/[id]/ ← Tiptap editor page
+    login/          ← Auth page with demo account shortcuts
+  components/
+    ShareModal.tsx  ← Share modal with user picker + collaborator list
+    ui/Toaster.tsx  ← Toast notification system
+  lib/
+    auth.ts         ← NextAuth v5 config (credentials provider)
+    prisma.ts       ← Prisma client singleton
+    utils.ts        ← formatDistanceToNow, cn helper
+  __tests__/
+    api.documents.test.ts
+prisma/
+  schema.prisma     ← User, Document, DocumentShare models
+  seed.ts           ← Seeds 2 demo users + 1 sample doc
+```

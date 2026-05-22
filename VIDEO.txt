@@ -1,0 +1,12 @@
+Walkthrough Video URL:
+https://youtu.be/[TO BE FILLED AFTER RECORDING]
+
+The video covers:
+- Signing in with both demo accounts
+- Creating and renaming a document
+- Using the rich-text toolbar (bold, italic, headings, lists)
+- Importing a .txt file as a new document
+- Sharing a document with Alex Reviewer
+- Signing in as Alex Reviewer and accessing the shared document
+- Refreshing to verify persistence
+- Key implementation decisions and AI workflow
