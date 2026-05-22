@@ -239,7 +239,7 @@ export function DashboardClient({ user, initialOwned, initialShared }: Props) {
           <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Shared with you</h2>
           {shared.length === 0 ? (
             <div className="bg-white border border-dashed border-gray-300 rounded-xl p-8 text-center">
-              <p className="text-gray-400 text-sm">No documents have been shared with you yet.</p>
+              <p className="text-gray-400 text-sm select-none">No documents have been shared with you yet.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
