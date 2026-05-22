@@ -4,7 +4,7 @@ A lightweight collaborative document editor built for the Ajaia AI-Native Full S
 
 ## Live Demo
 
-> Deployment link: *(see SUBMISSION.md)*
+> https://docuflow-eight.vercel.app
 
 **Demo accounts** (password: `password123` for both):
 

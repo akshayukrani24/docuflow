@@ -20,7 +20,7 @@
 
 ## Live Deployment
 
-> URL: *(to be filled after Vercel deploy)*
+> URL: https://docuflow-eight.vercel.app
 
 ## Test Credentials
 
@@ -48,7 +48,7 @@
 - [x] Sharing with owned/shared distinction in dashboard
 - [x] Share modal with user picker and collaborator list
 - [x] Revoking access
-- [x] Persistence (SQLite)
+- [x] Persistence (PostgreSQL on Neon, deployed)
 - [x] Authentication (seeded users, NextAuth v5)
 - [x] Tests (utility functions + auth guards)
 - [x] Error handling (empty title validation, unsupported file types, share conflicts)
@@ -60,7 +60,7 @@
 - [ ] Real-time collaboration cursors — would use Yjs + HocusPocus; requires ~3 extra hours
 - [ ] Export to Markdown — straightforward with Tiptap's Markdown extension; ~30 minutes
 - [ ] Version history — would store content snapshots; ~2 hours
-- [ ] Vercel deployment with persistent DB (PlanetScale or Turso) — ~30 minutes once connection string is configured
+- [x] Vercel deployment with Neon PostgreSQL — live at https://docuflow-eight.vercel.app
 
 ## Video
 
